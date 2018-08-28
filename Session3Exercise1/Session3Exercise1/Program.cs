@@ -10,15 +10,14 @@ namespace Session3Exercise1
     {
         static void Main(string[] args)
         {
+            Console.Write("Enter min number: ");
+            int min = int.Parse(Console.ReadLine());
             Console.Write("Enter max number: ");
             int max = int.Parse(Console.ReadLine());
-            string message = "";
-            for (int i = 1; i <= max; i++)
+            for (int i = min; i <= max; i++)
             {
-                message += i + ", ";
+                Console.WriteLine(i);
             }
-            message += "go!";
-            Console.WriteLine(message);
         }
     }
 }
