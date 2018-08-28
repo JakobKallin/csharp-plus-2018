@@ -1,1 +1,3 @@
-Detta repo innehåller den kod som vi skriver under lektionerna i Programmeringsteknik C# på Plushögskolan/Teknikhögskolan 2018.
+Detta repo innehåller lösningar till övningarna samt en del av den kod som vi skriver under lektionerna i Programmeringsteknik C# på Plushögskolan/Teknikhögskolan 2018.
+
+För att hitta koden till en övning eller lektion, gå två steg ned i mappen och öppna sedan filen Program.cs. Lösningen på övning 1 från lektion 1 finns med andra ord i filen Session1Exercise1\Session1Exercise1\Program.cs.

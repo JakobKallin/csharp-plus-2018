@@ -10,7 +10,6 @@ namespace Session2Exercise5
     {
         static void Main(string[] args)
         {
-            // Kör programmet med en breakpoint efter sista raden för att se värdena.
             bool a = false || true;
             bool b = false || false || true;
             bool c = true && false;
