@@ -1,0 +1,4 @@
+﻿AAA111,apelsin,rik på C-vitamin,10
+BBB222,banan,glöm inte fodralet,7
+CCC333,bananfodral,gjort av äkta plast,20
+DDD444,äpple,gammal klassiker,5
