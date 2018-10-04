@@ -10,31 +10,74 @@ namespace Session16
 {
     class MyForm : Form
     {
-        private TextBox NameBox = new TextBox { };
+        private NumericUpDown heightBox;
+        private NumericUpDown weightBox;
 
         public MyForm() {
             TableLayoutPanel table = new TableLayoutPanel
             {
-                RowCount = 2,
-                ColumnCount = 2
+                ColumnCount = 2,
+                Dock = DockStyle.Fill
             };
             Controls.Add(table);
-            
-            table.Controls.Add(NameBox);
 
-            Button button = new Button
+            table.Controls.Add(new Label
             {
-                Text = "Say Hello"
+                Text = "Height",
+                Dock = DockStyle.Fill,
+                TextAlign = ContentAlignment.MiddleRight
+            });
+            heightBox = new NumericUpDown {
+                Dock = DockStyle.Fill,
+                DecimalPlaces = 2,
+                Increment = 0.01M
             };
-            table.Controls.Add(button);
+            table.Controls.Add(heightBox);
 
-            // När "Click" sker på knappen, anropa "OnButtonClick".
-            button.Click += OnButtonClick;
+            table.Controls.Add(new Label
+            {
+                Text = "Weight",
+                Dock = DockStyle.Fill,
+                TextAlign = ContentAlignment.MiddleRight
+            });
+            weightBox = new NumericUpDown {
+                Dock = DockStyle.Fill
+            };
+            table.Controls.Add(weightBox);
+
+            Button bmiButton = new Button
+            {
+                Text = "Calculate BMI!",
+                Dock = DockStyle.Top
+            };
+            table.Controls.Add(bmiButton);
+            table.SetColumnSpan(bmiButton, 2);
+            bmiButton.Click += OnBmiButtonClick;
+
+            Button imperialButton = new Button
+            {
+                Text = "Calculate Imperial!",
+                Dock = DockStyle.Top
+            };
+            table.Controls.Add(imperialButton);
+            table.SetColumnSpan(imperialButton, 2);
+            imperialButton.Click += OnImperialButtonClick;
         }
 
-        private void OnButtonClick(object sender, EventArgs e)
+        private void OnBmiButtonClick(object sender, EventArgs e)
         {
-            MessageBox.Show("Hello " + NameBox.Text);
+            double height = (double) heightBox.Value;
+            double weight = (double) weightBox.Value;
+            double bmi = weight / (height * height);
+            MessageBox.Show("Your BMI is: " + bmi);
+        }
+
+        private void OnImperialButtonClick(object sender, EventArgs e)
+        {
+            double height = (double)heightBox.Value;
+            double weight = (double)weightBox.Value;
+            double bmi = weight / (height * height) * 703;
+            MessageBox.Show("Your BMI is: " + bmi);
         }
     }
 }
