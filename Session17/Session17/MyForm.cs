@@ -8,7 +8,7 @@ using System.Drawing;
 
 namespace Session17
 {
-    class Movie
+    class Film
     {
         public string Title;
         public int Year;
@@ -17,8 +17,7 @@ namespace Session17
 
     class MyForm : Form
     {
-        private ComboBox movieBox;
-        private Movie[] movies;
+        private Film[] movies;
         private Label summaryLabel;
 
         public MyForm()
@@ -27,47 +26,53 @@ namespace Session17
             Size = new Size(400, 300);
             Font = new Font("Arial", 20);
 
-            movies = new Movie[]
+            movies = new Film[]
             {
-                new Movie { Title = "The Matrix", Year = 1999, Summary = "Folk i svarta kappor käkar röda piller." },
-                new Movie { Title = "Se7en", Year = 1995, Summary = "Brad Pitt och Morgan Freeman jagar en seriemördare." },
-                new Movie { Title = "Man on the Moon", Year = 1999, Summary = "En man som trollar showbusinessvärlden." }
+                new Film { Title = "Star Wars", Year = 1977, Summary = "War in space."},
+                new Film { Title = "The Matrix", Year = 1999, Summary = "Folk i svarta kappor käkar röda piller." },
+                new Film { Title = "Se7en", Year = 1995, Summary = "Brad Pitt och Morgan Freeman jagar en seriemördare." },
+                new Film { Title = "Sjunde inseglet", Year = 1957, Summary = "Jag är döden, vill du spela schack?"},
+                new Film { Title = "Man on the Moon", Year = 1999, Summary = "En man som trollar showbusinessvärlden." },
+                new Film { Title = "Superman", Year = 1978, Summary = "Is it a bird or a plane? No, it's me!"}
             };
 
             TableLayoutPanel table = new TableLayoutPanel
             {
-                ColumnCount = 1,
-                RowCount = 2,
+                ColumnCount = 2,
                 Dock = DockStyle.Fill
             };
+            table.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50));
+            table.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50));
             Controls.Add(table);
 
-            movieBox = new ComboBox
+            foreach (Film m in movies)
             {
-                DropDownStyle = ComboBoxStyle.DropDownList,
-                Dock = DockStyle.Fill
-            };
-            table.Controls.Add(movieBox);
-            movieBox.SelectedIndexChanged += ComboboxChanged;
-
-            foreach (Movie m in movies)
-            {
-                movieBox.Items.Add(m.Title + " (" + m.Year + ")");
+                if (m.Year >= 1990)
+                {
+                    Label movieLabel = new Label
+                    {
+                        Text = m.Title + " (" + m.Year + ")",
+                        Dock = DockStyle.Fill,
+                        AutoSize = true
+                    };
+                    table.Controls.Add(movieLabel);
+                    Button movieButton = new Button
+                    {
+                        Text = "Show Summary",
+                        AutoSize = true
+                    };
+                    movieButton.Tag = m;
+                    movieButton.Click += SummaryButtonClicked;
+                    table.Controls.Add(movieButton);
+                }
             }
-
-            summaryLabel = new Label
-            {
-                Text = "This text will show the movie summary.",
-                Dock = DockStyle.Fill,
-                TextAlign = ContentAlignment.MiddleCenter
-            };
-            table.Controls.Add(summaryLabel);
         }
 
-        private void ComboboxChanged(object sender, EventArgs e)
+        private void SummaryButtonClicked(object sender, EventArgs e)
         {
-            Movie m = movies[movieBox.SelectedIndex];
-            summaryLabel.Text = m.Summary;
+            Button button = (Button)sender;
+            Film m = (Film)button.Tag;
+            MessageBox.Show("Summary: " + m.Summary);
         }
     }
 }
