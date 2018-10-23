@@ -16,11 +16,10 @@ namespace Session22Part2
     {
         public string Name { get; set; }
         public int Age { get; set; }
-        public string Species { get; set; }
 
-        public void ShowDescription()
+        public virtual void ShowDescription()
         {
-            Console.WriteLine("This is a " + Species);
+            Console.WriteLine("This is an animal");
         }
 
         public int CalculateAgeInDogYears()
@@ -31,10 +30,23 @@ namespace Session22Part2
 
     class Dog : Animal
     {
+        public override void ShowDescription()
+        {
+            Console.WriteLine("This is a dog");
+        }
+
+        public void Bark()
+        {
+            Console.WriteLine("Ruff!");
+        }
     }
 
     class Cat : Animal
     {
+        public override void ShowDescription()
+        {
+            Console.WriteLine("This is a cat");
+        }
     }
 
     class Program
@@ -44,22 +56,19 @@ namespace Session22Part2
             Animal a = new Animal
             {
                 Name = "Kalle",
-                Age = 5,
-                Species = "animal"
+                Age = 5
             };
 
             Dog d = new Dog
             {
                 Name = "Fido",
-                Age = 17,
-                Species = "dog"
+                Age = 17
             };
 
             Cat c = new Cat
             {
                 Name = "Jakob",
-                Age = 31,
-                Species = "cat"
+                Age = 31
             };
 
             List<Animal> animals = new List<Animal>
