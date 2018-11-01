@@ -10,12 +10,15 @@ namespace Session24Tests
         [TestMethod]
         public void TestDeposit()
         {
+            // Arrange
             Account account = new Account
             {
                 Name = "Test",
                 Balance = 0
             };
+            // Act
             account.Deposit(500);
+            // Assert
             Assert.AreEqual(account.Balance, 500);
         }
 
@@ -71,6 +74,30 @@ namespace Session24Tests
             from.TransferTo(to, 200);
             Assert.AreEqual(from.Balance, 300);
             Assert.AreEqual(to.Balance, 200);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void NullAccountTransfer()
+        {
+            Account from = new Account
+            {
+                Name = "From",
+                Balance = 500
+            };
+            from.TransferTo(null, 200);
+        }
+
+        [TestMethod]
+        public void Interest()
+        {
+            Account account = new Account
+            {
+                Name = "Savings",
+                Balance = 1000
+            };
+            account.ApplyInterest(5);
+            Assert.AreEqual(1050, account.Balance);
         }
     }
 }

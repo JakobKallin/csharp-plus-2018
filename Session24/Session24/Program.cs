@@ -13,6 +13,11 @@ namespace Session24
 
         public void Withdraw(int amount)
         {
+            if (amount < 0)
+            {
+                throw new InvalidOperationException("Cannot withdraw negative amount");
+            }
+
             if (Balance >= amount)
             {
                 Balance -= amount;
@@ -25,11 +30,21 @@ namespace Session24
 
         public void Deposit(int amount)
         {
+            if (amount < 0)
+            {
+                throw new InvalidOperationException("Cannot deposit negative amount");
+            }
+
             Balance += amount;
         }
 
         public void TransferTo(Account toAccount, int amount)
         {
+            if (toAccount == null)
+            {
+                throw new InvalidOperationException("Cannot transfer to null account");
+            }
+
             if (Balance >= amount)
             {
                 Withdraw(amount);
@@ -39,6 +54,11 @@ namespace Session24
             {
                 throw new InvalidOperationException("Balance too low to transfer");
             }
+        }
+
+        public void ApplyInterest(int v)
+        {
+            Balance = Balance + (int) (Balance * (v / 100.0));
         }
     }
 
